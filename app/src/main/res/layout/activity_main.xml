@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/container_main_page"
     android:clipToPadding="false"
-    android:gravity="left|top"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_food_map"
         android:layout_width="205dp"
         android:layout_height="40dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="-4dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
         android:gravity="left|center_vertical"
         android:includeFontPadding="false"
         android:maxLines="1"
         android:singleLine="true"
         android:text="逢甲美食地圖"
         android:textColor="#FF000000"
-        android:textSize="32dp" />
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/container_search"
         android:layout_width="293dp"
         android:layout_height="33dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="16dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_food_map">
 
         <ImageView
             android:id="@+id/image_search_field"
@@ -42,7 +42,7 @@
             android:background="@drawable/image_search_field"
             android:scaleType="centerCrop" />
 
-        <TextView
+        <EditText
             android:id="@+id/text_search_label"
             android:layout_width="match_parent"
             android:layout_height="22dp"
@@ -50,11 +50,12 @@
             android:layout_marginTop="5.5dp"
             android:layout_marginRight="17.24dp"
             android:layout_marginBottom="5.5dp"
+            android:background="@android:color/transparent"
             android:gravity="left|center_vertical"
+            android:hint="Search"
             android:includeFontPadding="false"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Search"
             android:textColor="#FF9586A8"
             android:textSize="17dp" />
 
@@ -68,538 +69,35 @@
             android:layout_marginBottom="8.25dp"
             android:scaleType="centerInside"
             android:src="@drawable/image_search_icon" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/container_frame"
-        android:layout_width="322dp"
-        android:layout_height="586dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="11dp">
 
         <LinearLayout
-            android:id="@+id/container_group"
-            android:layout_width="322dp"
-            android:layout_height="738.93dp"
-            android:gravity="left|top"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/container_group6"
-                android:layout_width="match_parent"
-                android:layout_height="134.93dp">
-
-                <ImageView
-                    android:id="@+id/image_rectangle2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/image_rectangle2"
-                    android:scaleType="centerCrop" />
-
-                <FrameLayout
-                    android:id="@+id/container_group7"
-                    android:layout_width="210.5dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="11.53dp"
-                    android:layout_marginTop="11.57dp"
-                    android:layout_marginBottom="11.57dp">
-
-                    <ImageView
-                        android:id="@+id/image_rectangle3"
-                        android:layout_width="91.31dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/image_rectangle3" />
-
-                    <FrameLayout
-                        android:id="@+id/container_group8"
-                        android:layout_width="match_parent"
-                        android:layout_height="65.54dp"
-                        android:layout_gravity="top"
-                        android:layout_marginLeft="104.77dp"
-                        android:layout_marginTop="7.71dp"
-                        android:layout_marginRight="0dp">
-
-                        <LinearLayout
-                            android:id="@+id/container_group9"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="-0.86dp"
-                            android:clipToPadding="false"
-                            android:gravity="left|top"
-                            android:orientation="vertical"
-                            android:paddingTop="0.86dp">
-
-                            <TextView
-                                android:id="@+id/text_location1"
-                                android:layout_width="match_parent"
-                                android:layout_height="21dp"
-                                android:layout_marginTop="-0.86dp"
-                                android:layout_marginBottom="-0.86dp"
-                                android:gravity="left|center_vertical"
-                                android:includeFontPadding="false"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Santorini Islnd"
-                                android:textColor="#FF1B1E28"
-                                android:textSize="16dp" />
-
-                            <FrameLayout
-                                android:id="@+id/container_group10"
-                                android:layout_width="63.44dp"
-                                android:layout_height="0dp"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginTop="30.84dp"
-                                android:layout_marginBottom="0dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/image_group1"
-                                    android:layout_width="38.45dp"
-                                    android:layout_height="10.6dp"
-                                    android:layout_gravity="top|left"
-                                    android:layout_marginTop="1.93dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/image_group1" />
-
-                                <TextView
-                                    android:id="@+id/text_rating1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="17dp"
-                                    android:layout_marginLeft="44.21dp"
-                                    android:layout_marginTop="-0.79dp"
-                                    android:layout_marginBottom="-0.79dp"
-                                    android:gravity="left|center_vertical"
-                                    android:includeFontPadding="false"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:text="4.8"
-                                    android:textColor="#FF1B1E28"
-                                    android:textSize="13dp" />
-                            </FrameLayout>
-                        </LinearLayout>
-                    </FrameLayout>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/container_group21"
-                android:layout_width="match_parent"
-                android:layout_height="134.93dp"
-                android:layout_marginTop="15.42dp">
-
-                <ImageView
-                    android:id="@+id/image_rectangle8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/image_rectangle8"
-                    android:scaleType="centerCrop" />
-
-                <FrameLayout
-                    android:id="@+id/container_group22"
-                    android:layout_width="225.88dp"
-                    android:layout_height="111.8dp"
-                    android:layout_gravity="top|left"
-                    android:layout_marginLeft="11.53dp"
-                    android:layout_marginTop="11.57dp">
-
-                    <ImageView
-                        android:id="@+id/image_rectangle9"
-                        android:layout_width="91.31dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/image_rectangle9" />
-
-                    <FrameLayout
-                        android:id="@+id/container_group23"
-                        android:layout_width="match_parent"
-                        android:layout_height="65.54dp"
-                        android:layout_gravity="top"
-                        android:layout_marginLeft="104.77dp"
-                        android:layout_marginTop="7.71dp"
-                        android:layout_marginRight="0dp">
-
-                        <LinearLayout
-                            android:id="@+id/container_group24"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="-0.86dp"
-                            android:clipToPadding="false"
-                            android:gravity="left|top"
-                            android:orientation="vertical"
-                            android:paddingTop="0.86dp">
-
-                            <TextView
-                                android:id="@+id/text_location4"
-                                android:layout_width="match_parent"
-                                android:layout_height="21dp"
-                                android:layout_marginTop="-0.86dp"
-                                android:layout_marginBottom="-0.86dp"
-                                android:gravity="left|center_vertical"
-                                android:includeFontPadding="false"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Bukita Rayandro"
-                                android:textColor="#FF1B1E28"
-                                android:textSize="16dp" />
-
-                            <FrameLayout
-                                android:id="@+id/container_group25"
-                                android:layout_width="63.44dp"
-                                android:layout_height="0dp"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginTop="30.84dp"
-                                android:layout_marginBottom="0dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/image_group4"
-                                    android:layout_width="38.45dp"
-                                    android:layout_height="10.6dp"
-                                    android:layout_gravity="top|left"
-                                    android:layout_marginTop="1.93dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/image_group4" />
-
-                                <TextView
-                                    android:id="@+id/text_rating4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="17dp"
-                                    android:layout_marginLeft="44.21dp"
-                                    android:layout_marginTop="-0.79dp"
-                                    android:layout_marginBottom="-0.79dp"
-                                    android:gravity="left|center_vertical"
-                                    android:includeFontPadding="false"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:text="4.3"
-                                    android:textColor="#FF1B1E28"
-                                    android:textSize="13dp" />
-                            </FrameLayout>
-                        </LinearLayout>
-                    </FrameLayout>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/container_group11"
-                android:layout_width="match_parent"
-                android:layout_height="134.93dp"
-                android:layout_marginTop="15.42dp">
-
-                <ImageView
-                    android:id="@+id/image_rectangle4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/image_rectangle4"
-                    android:scaleType="centerCrop" />
-
-                <FrameLayout
-                    android:id="@+id/container_group12"
-                    android:layout_width="215.31dp"
-                    android:layout_height="111.8dp"
-                    android:layout_gravity="top|left"
-                    android:layout_marginLeft="11.53dp"
-                    android:layout_marginTop="11.57dp">
-
-                    <ImageView
-                        android:id="@+id/image_rectangle5"
-                        android:layout_width="91.31dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/image_rectangle5" />
-
-                    <FrameLayout
-                        android:id="@+id/container_group13"
-                        android:layout_width="match_parent"
-                        android:layout_height="65.54dp"
-                        android:layout_gravity="top"
-                        android:layout_marginLeft="104.77dp"
-                        android:layout_marginTop="7.71dp"
-                        android:layout_marginRight="0dp">
-
-                        <LinearLayout
-                            android:id="@+id/container_group14"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="-0.86dp"
-                            android:clipToPadding="false"
-                            android:gravity="left|top"
-                            android:orientation="vertical"
-                            android:paddingTop="0.86dp">
-
-                            <TextView
-                                android:id="@+id/text_location2"
-                                android:layout_width="match_parent"
-                                android:layout_height="21dp"
-                                android:layout_marginTop="-0.86dp"
-                                android:layout_marginBottom="-0.86dp"
-                                android:gravity="left|center_vertical"
-                                android:includeFontPadding="false"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Cluster Omega"
-                                android:textColor="#FF1B1E28"
-                                android:textSize="16dp" />
-
-                            <FrameLayout
-                                android:id="@+id/container_group15"
-                                android:layout_width="63.44dp"
-                                android:layout_height="0dp"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginTop="30.84dp"
-                                android:layout_marginBottom="0dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/image_group2"
-                                    android:layout_width="38.45dp"
-                                    android:layout_height="10.6dp"
-                                    android:layout_gravity="top|left"
-                                    android:layout_marginTop="1.93dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/image_group2" />
-
-                                <TextView
-                                    android:id="@+id/text_rating2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="17dp"
-                                    android:layout_marginLeft="44.21dp"
-                                    android:layout_marginTop="-0.79dp"
-                                    android:layout_marginBottom="-0.79dp"
-                                    android:gravity="left|center_vertical"
-                                    android:includeFontPadding="false"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:text="4.9"
-                                    android:textColor="#FF1B1E28"
-                                    android:textSize="13dp" />
-                            </FrameLayout>
-                        </LinearLayout>
-                    </FrameLayout>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/container_group16"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="15.42dp"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/image_rectangle6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/image_rectangle6"
-                    android:scaleType="centerCrop" />
-
-                <FrameLayout
-                    android:id="@+id/container_group17"
-                    android:layout_width="239.34dp"
-                    android:layout_height="111.8dp"
-                    android:layout_gravity="top|left"
-                    android:layout_marginLeft="11.53dp"
-                    android:layout_marginTop="11.57dp">
-
-                    <ImageView
-                        android:id="@+id/image_rectangle7"
-                        android:layout_width="91.31dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/image_rectangle7" />
-
-                    <FrameLayout
-                        android:id="@+id/container_group18"
-                        android:layout_width="match_parent"
-                        android:layout_height="65.54dp"
-                        android:layout_gravity="top"
-                        android:layout_marginLeft="104.77dp"
-                        android:layout_marginTop="7.71dp">
-
-                        <LinearLayout
-                            android:id="@+id/container_group19"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="-0.86dp"
-                            android:clipToPadding="false"
-                            android:gravity="left|top"
-                            android:orientation="vertical"
-                            android:paddingTop="0.86dp">
-
-                            <TextView
-                                android:id="@+id/text_location3"
-                                android:layout_width="match_parent"
-                                android:layout_height="21dp"
-                                android:layout_marginTop="-0.86dp"
-                                android:layout_marginBottom="-0.86dp"
-                                android:gravity="left|center_vertical"
-                                android:includeFontPadding="false"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Shajek Bandorban"
-                                android:textColor="#FF1B1E28"
-                                android:textSize="16dp" />
-
-                            <FrameLayout
-                                android:id="@+id/container_group20"
-                                android:layout_width="63.44dp"
-                                android:layout_height="0dp"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginTop="30.84dp"
-                                android:layout_marginBottom="0dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/image_group3"
-                                    android:layout_width="38.45dp"
-                                    android:layout_height="10.6dp"
-                                    android:layout_gravity="top|left"
-                                    android:layout_marginTop="1.93dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/image_group3" />
-
-                                <TextView
-                                    android:id="@+id/text_rating3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="17dp"
-                                    android:layout_marginLeft="44.21dp"
-                                    android:layout_marginTop="-0.79dp"
-                                    android:layout_marginBottom="-0.79dp"
-                                    android:gravity="left|center_vertical"
-                                    android:includeFontPadding="false"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:text="4.5"
-                                    android:textColor="#FF1B1E28"
-                                    android:textSize="13dp" />
-                            </FrameLayout>
-                        </LinearLayout>
-                    </FrameLayout>
-                </FrameLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/container_group1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="18dp"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/image_rectangle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/image_rectangle"
-                    android:scaleType="centerCrop" />
-
-                <FrameLayout
-                    android:id="@+id/container_group2"
-                    android:layout_width="239.34dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="11.53dp"
-                    android:layout_marginTop="11.57dp"
-                    android:layout_marginBottom="11.57dp">
-
-                    <ImageView
-                        android:id="@+id/image_rectangle1"
-                        android:layout_width="91.31dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/image_rectangle1" />
-
-                    <FrameLayout
-                        android:id="@+id/container_group3"
-                        android:layout_width="match_parent"
-                        android:layout_height="65.54dp"
-                        android:layout_gravity="top"
-                        android:layout_marginLeft="104.77dp"
-                        android:layout_marginTop="7.71dp">
-
-                        <LinearLayout
-                            android:id="@+id/container_group4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="-0.86dp"
-                            android:clipToPadding="false"
-                            android:gravity="left|top"
-                            android:orientation="vertical"
-                            android:paddingTop="0.86dp">
-
-                            <TextView
-                                android:id="@+id/text_location"
-                                android:layout_width="match_parent"
-                                android:layout_height="21dp"
-                                android:layout_marginTop="-0.86dp"
-                                android:layout_marginBottom="-0.86dp"
-                                android:gravity="left|center_vertical"
-                                android:includeFontPadding="false"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Shajek Bandorban"
-                                android:textColor="#FF1B1E28"
-                                android:textSize="16dp" />
-
-                            <FrameLayout
-                                android:id="@+id/container_group5"
-                                android:layout_width="63.44dp"
-                                android:layout_height="0dp"
-                                android:layout_gravity="left"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginTop="30.84dp"
-                                android:layout_marginBottom="0dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/image_group"
-                                    android:layout_width="38.45dp"
-                                    android:layout_height="10.6dp"
-                                    android:layout_gravity="top|left"
-                                    android:layout_marginTop="1.93dp"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/image_group" />
-
-                                <TextView
-                                    android:id="@+id/text_rating"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="17dp"
-                                    android:layout_marginLeft="44.21dp"
-                                    android:layout_marginTop="-0.79dp"
-                                    android:layout_marginBottom="-0.79dp"
-                                    android:gravity="left|center_vertical"
-                                    android:includeFontPadding="false"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:text="4.5"
-                                    android:textColor="#FF1B1E28"
-                                    android:textSize="13dp" />
-                            </FrameLayout>
-                        </LinearLayout>
-                    </FrameLayout>
-                </FrameLayout>
-            </FrameLayout>
-        </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
     </FrameLayout>
 
+    <LinearLayout
+        android:layout_width="376dp"
+        android:layout_height="514dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_search">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/StoreList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
     <FrameLayout
-        android:layout_width="344dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="7dp">
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/container_tab_bar_background"
@@ -608,60 +106,40 @@
             android:scaleType="centerCrop"
             android:src="@drawable/container_tab_bar_background" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/container_tab_bar_tab_selected"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="top"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="-20dp"
-            android:layout_marginRight="276dp"
+            android:background="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/container_tab_bar_tab_selected" />
+            android:src="@drawable/container_tab_bar_tab_selected"
+            android:contentDescription="@string/tab_selected_desc"/>
 
-        <FrameLayout
-            android:id="@+id/container_tab_bar_tab1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="top"
-            android:layout_marginLeft="138dp"
-            android:layout_marginTop="-20dp"
-            android:layout_marginRight="138dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-        </FrameLayout>
-
-        <ImageView
+        <ImageButton
             android:id="@+id/container_tab_bar_icon_heart"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="162dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="162dp"
-            android:layout_marginBottom="32dp"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@null"
             android:scaleType="centerInside"
-            android:src="@drawable/container_tab_bar_icon_heart" />
+            android:src="@drawable/container_tab_bar_icon_heart"
+            android:contentDescription="@string/icon_heart_desc" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/container_tab_bar_tab2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:layout_gravity="top"
-            android:layout_marginLeft="276dp"
+            android:layout_gravity="top|end"
             android:layout_marginTop="-20dp"
+            android:layout_marginEnd="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/container_tab_bar_tab2" />
-
-        <ImageView
-            android:id="@+id/container_tab_bar_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="top"
-            android:layout_marginTop="-20dp"
-            android:background="@drawable/container_tab_bar_divider"
-            android:scaleType="centerCrop" />
+            android:src="@drawable/container_tab_bar_tab2"
+            android:background="@null"
+            android:contentDescription="@string/tab2_desc" />
     </FrameLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

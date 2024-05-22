@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/container_group6"
+        android:layout_width="wrap_content"
+        android:layout_height="134.93dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/container_group7"
+            android:layout_width="385dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="11.53dp"
+            android:layout_marginTop="11.57dp"
+            android:layout_marginBottom="11.57dp">
+
+            <ImageView
+                android:id="@+id/image_store"
+                android:layout_width="91.31dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_rectangle3" />
+
+            <FrameLayout
+                android:id="@+id/container_group8"
+                android:layout_width="match_parent"
+                android:layout_height="65.54dp"
+                android:layout_gravity="top"
+                android:layout_marginLeft="104.77dp"
+                android:layout_marginTop="7.71dp"
+                android:layout_marginRight="0dp">
+
+                <LinearLayout
+                    android:id="@+id/container_group9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-0.86dp"
+                    android:clipToPadding="false"
+                    android:gravity="left|top"
+                    android:orientation="vertical"
+                    android:paddingTop="0.86dp">
+
+                    <TextView
+                        android:id="@+id/text_store"
+                        android:layout_width="match_parent"
+                        android:layout_height="21dp"
+                        android:layout_marginTop="-0.86dp"
+                        android:layout_marginBottom="-0.86dp"
+                        android:gravity="left|center_vertical"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="Santorini Islnd"
+                        android:textColor="#FF1B1E28"
+                        android:textSize="16dp" />
+
+                    <FrameLayout
+                        android:id="@+id/container_group10"
+                        android:layout_width="63.44dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="30.84dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/image_group1"
+                            android:layout_width="38.45dp"
+                            android:layout_height="10.6dp"
+                            android:layout_gravity="top|left"
+                            android:layout_marginTop="1.93dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/image_group1" />
+
+                        <TextView
+                            android:id="@+id/text_rating1"
+                            android:layout_width="match_parent"
+                            android:layout_height="17dp"
+                            android:layout_marginLeft="44.21dp"
+                            android:layout_marginTop="-0.79dp"
+                            android:layout_marginBottom="-0.79dp"
+                            android:gravity="left|center_vertical"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="4.8"
+                            android:textColor="#FF1B1E28"
+                            android:textSize="13dp" />
+                    </FrameLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
