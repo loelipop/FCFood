@@ -129,7 +129,7 @@
             android:contentDescription="@string/icon_heart_desc" />
 
         <ImageButton
-            android:id="@+id/container_tab_bar_tab2"
+            android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:layout_gravity="top|end"
