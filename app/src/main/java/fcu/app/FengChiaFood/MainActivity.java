@@ -1,6 +1,9 @@
 package fcu.app.FengChiaFood;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView store_list;
     private List<ShopDetails> shopDetailsList;
+    private ImageButton GoProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        GoProfile = findViewById(R.id.user_profile);
         store_list = findViewById(R.id.StoreList);
         store_list.setLayoutManager(new LinearLayoutManager(this));
         shopDetailsList = new ArrayList<>();
@@ -38,5 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
         store_list.setAdapter(adapter);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        };
+        GoProfile.setOnClickListener(listener);
     }
 }

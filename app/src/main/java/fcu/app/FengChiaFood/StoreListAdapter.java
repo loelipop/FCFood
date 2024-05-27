@@ -1,6 +1,7 @@
 package fcu.app.FengChiaFood;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,12 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.MyVi
         holder.storeImage.setImageResource(shopDetails.getStoreImageId());
         holder.storeName.setText(shopDetails.getStoreName());
         holder.storeRating.setText(shopDetails.getStoreRating());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ShopDescription.class);
+            intent.putExtra("shopDetails", shopDetails);
+            context.startActivity(intent);
+        });
     }
 
     @Override

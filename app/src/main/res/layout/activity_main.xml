@@ -107,19 +107,19 @@
             android:src="@drawable/container_tab_bar_background" />
 
         <ImageButton
-            android:id="@+id/container_tab_bar_tab_selected"
+            android:id="@+id/main_profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top|start"
             android:layout_marginStart="16dp"
             android:layout_marginTop="-20dp"
             android:background="@null"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@drawable/container_tab_bar_tab_selected"
             android:contentDescription="@string/tab_selected_desc"/>
 
         <ImageButton
-            android:id="@+id/container_tab_bar_icon_heart"
+            android:id="@+id/collection_profile"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -129,16 +129,16 @@
             android:contentDescription="@string/icon_heart_desc" />
 
         <ImageButton
-            android:id="@+id/tv_user"
+            android:id="@+id/user_profile"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="top|end"
             android:layout_marginTop="-20dp"
             android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/container_tab_bar_tab2"
             android:background="@null"
-            android:contentDescription="@string/tab2_desc" />
+            android:contentDescription="@string/tab2_desc"
+            android:scaleType="centerCrop"
+            android:src="@drawable/container_tab_bar_tab2" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

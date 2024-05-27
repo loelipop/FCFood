@@ -51,7 +51,7 @@
             android:src="@drawable/container_tab_bar_background" />
 
         <ImageButton
-            android:id="@+id/container_tab_bar_tab_selected"
+            android:id="@+id/main_profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="top|start"
@@ -64,7 +64,7 @@
             android:tint="#9586A8" />
 
         <ImageButton
-            android:id="@+id/container_tab_bar_icon_heart"
+            android:id="@+id/collection_profile"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -75,7 +75,7 @@
             android:tint="@color/design_default_color_primary" />
 
         <ImageButton
-            android:id="@+id/tv_user"
+            android:id="@+id/user_profile"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:layout_gravity="top|end"
