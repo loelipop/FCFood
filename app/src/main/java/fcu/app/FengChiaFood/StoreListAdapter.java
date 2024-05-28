@@ -32,13 +32,13 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull StoreListAdapter.MyViewHolder holder, int position) {
         ShopDetails shopDetails = shopDetailsList.get(position);
-        holder.storeImage.setImageResource(shopDetails.getStoreImageId());
+        holder.storeImage.setImageBitmap(shopDetails.getStoreImage());
         holder.storeName.setText(shopDetails.getStoreName());
         holder.storeRating.setText(shopDetails.getStoreRating());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ShopDescription.class);
-            intent.putExtra("shopDetails", shopDetails);
+            intent.putExtra("storeId", shopDetails.getStoreId());
             context.startActivity(intent);
         });
     }

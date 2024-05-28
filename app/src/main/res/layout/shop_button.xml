@@ -7,12 +7,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/container_group6"
-        android:layout_width="wrap_content"
-        android:layout_height="134.93dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="0dp"
+        android:layout_height="132dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

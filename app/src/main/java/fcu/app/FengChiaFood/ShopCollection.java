@@ -27,7 +27,7 @@ public class ShopCollection extends AppCompatActivity {
             return insets;
         });
 
-        store_list = findViewById(R.id.StoreList);
+       /* store_list = findViewById(R.id.StoreList);
         store_list.setLayoutManager(new LinearLayoutManager(this));
         shopDetailsList = new ArrayList<>();
         shopDetailsList.add(new ShopDetails(R.drawable.menmonster, "Men Monster", "4.4"));
@@ -37,6 +37,6 @@ public class ShopCollection extends AppCompatActivity {
         shopDetailsList.add(new ShopDetails(R.drawable.zhengxian, "爭鮮迴轉壽司-逢甲店", "4.0"));
 
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
-        store_list.setAdapter(adapter);
+        store_list.setAdapter(adapter);*/
     }
 }
