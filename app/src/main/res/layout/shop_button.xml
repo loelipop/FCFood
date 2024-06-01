@@ -29,13 +29,14 @@
             android:layout_marginTop="11.57dp"
             android:layout_marginBottom="11.57dp">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_store"
                 android:layout_width="91.31dp"
                 android:layout_height="match_parent"
+                app:shapeAppearanceOverlay="@style/circular"
                 android:layout_gravity="left"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image_rectangle3" />
+                android:src="@drawable/menmonster" />
 
             <FrameLayout
                 android:id="@+id/container_group8"

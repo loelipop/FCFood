@@ -17,6 +17,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+
 public class ShopDescription extends AppCompatActivity {
 
     private ImageView storeImageView;
@@ -24,8 +34,10 @@ public class ShopDescription extends AppCompatActivity {
     private TextView storeRatingTextView;
     private TextView storeAddressTextView;
     private TextView storeDescriptionTextView;
-    private DatabaseHelper dbHelper;
     private String googleMapUrl;
+    private FirebaseFirestore db;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +55,16 @@ public class ShopDescription extends AppCompatActivity {
         storeRatingTextView = findViewById(R.id.des_rating);
         storeAddressTextView = findViewById(R.id.des_address);
         storeDescriptionTextView = findViewById(R.id.des_description);
-        dbHelper = new DatabaseHelper(this);
-        int storeId = getIntent().getIntExtra("storeId", -1);
-        if (storeId != -1) {
-            loadShopDetailsFromDatabase(storeId);
-        }
 
+        db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
+
+        String storeId = getIntent().getStringExtra("storeId");
+        if (storeId != null) {
+            loadShopDetailsFromFirestore(storeId);
+        }
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,41 +83,41 @@ public class ShopDescription extends AppCompatActivity {
 
         storeAddressTextView.setOnClickListener(listener);
     }
-    private void loadShopDetailsFromDatabase(int storeId) {
-        Cursor cursor = dbHelper.getAllStores();
-        if (cursor != null) {
-            int idIndex = cursor.getColumnIndex("id");
-            int nameIndex = cursor.getColumnIndex("name");
-            int ratingIndex = cursor.getColumnIndex("rating");
-            int photoIndex = cursor.getColumnIndex("photo");
-            int addressIndex = cursor.getColumnIndex("address");
-            int descriptionIndex = cursor.getColumnIndex("description");
-            int googleMapUrlIndex = cursor.getColumnIndex("google_map_url");
-
-            if (idIndex >= 0 && nameIndex >= 0 && ratingIndex >= 0 && photoIndex >= 0 && addressIndex >= 0 && descriptionIndex >= 0 && googleMapUrlIndex >= 0) {
-                while (cursor.moveToNext()) {
-                    int id = cursor.getInt(idIndex);
-                    if (id == storeId) {
-                        String name = cursor.getString(nameIndex);
-                        float rating = cursor.getFloat(ratingIndex);
-                        byte[] imageBytes = cursor.getBlob(photoIndex);
-                        String address = cursor.getString(addressIndex);
-                        String description = cursor.getString(descriptionIndex);
-                        googleMapUrl = cursor.getString(googleMapUrlIndex);
-
-                        Bitmap photo = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                        storeImageView.setImageBitmap(photo);
+    private void loadShopDetailsFromFirestore(String storeId){
+        db.collection("stores").document(storeId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        double rating = documentSnapshot.getDouble("rating");
+                        String photoUrl = documentSnapshot.getString("photo_url");
+                        String address = documentSnapshot.getString("address");
+                        String description = documentSnapshot.getString("description");
+                        googleMapUrl = documentSnapshot.getString("google_map_url");
+                        StorageReference photoref = storage.getReferenceFromUrl(photoUrl);
+                        try{
+                            final File file =File.createTempFile("image", "jpg");
+                            photoref.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                                    storeImageView.setImageBitmap(bitmap);
+                                }
+                            });
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
                         storeNameTextView.setText(name);
                         storeRatingTextView.setText(String.valueOf(rating));
                         storeAddressTextView.setText(address);
                         storeDescriptionTextView.setText(description);
-                        break;
+
+
+                    } else {
+                        Toast.makeText(ShopDescription.this, "Store not found", Toast.LENGTH_SHORT).show();
                     }
-                }
-            } else {
-                Toast.makeText(this, "Error retrieving store data from database.", Toast.LENGTH_LONG).show();
-            }
-            cursor.close();
-        }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(ShopDescription.this, "Error loading store details", Toast.LENGTH_SHORT).show();
+                });
     }
 }

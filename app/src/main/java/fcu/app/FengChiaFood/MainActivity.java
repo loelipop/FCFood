@@ -21,11 +21,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerView store_list;
     private List<ShopDetails> shopDetailsList;
     private ImageButton GoProfile;
-    private DatabaseHelper dbHelper;
+    private FirebaseFirestore db;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,45 +52,14 @@ public class MainActivity extends AppCompatActivity {
         GoProfile = findViewById(R.id.user_profile);
         store_list = findViewById(R.id.StoreList);
         store_list.setLayoutManager(new LinearLayoutManager(this));
-        dbHelper = new DatabaseHelper(this);
-        dbHelper.initializeDatabase();
 
+        FirebaseApp.initializeApp(this);
+        db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
         shopDetailsList = new ArrayList<>();
-        Cursor cursor = dbHelper.getAllStores();
-        if (cursor != null) {
-            int idIndex = cursor.getColumnIndex("id");
-            int nameIndex = cursor.getColumnIndex("name");
-            int ratingIndex = cursor.getColumnIndex("rating");
-            int photoIndex = cursor.getColumnIndex("photo");
-            int addressIndex = cursor.getColumnIndex("address");
-            int descriptionIndex = cursor.getColumnIndex("description");
-            int googleMapUrlIndex = cursor.getColumnIndex("google_map_url");
-
-            if (nameIndex >= 0 && ratingIndex >= 0 && photoIndex >= 0) {
-                if (cursor.moveToFirst()) {
-                    do {
-                        int id = cursor.getInt(idIndex);
-                        String name = cursor.getString(nameIndex);
-                        float rating = cursor.getFloat(ratingIndex);
-                        byte[] imageBytes = cursor.getBlob(photoIndex);
-                        String address = cursor.getString(addressIndex);
-                        String description = cursor.getString(descriptionIndex);
-                        String googleMapUrl = cursor.getString(googleMapUrlIndex);
-
-                        Bitmap photo = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                        shopDetailsList.add(new ShopDetails(id,photo, name, String.valueOf(rating), address, description, googleMapUrl));
-                    } while (cursor.moveToNext());
-                }
-            } else {
-                Toast.makeText(this, "Error retrieving store data from database.", Toast.LENGTH_LONG).show();
-            }
-            cursor.close();
-        }
-        Log.d("MainActivity", "Loaded " + shopDetailsList.size() + " stores from database");
-        for (ShopDetails details : shopDetailsList) {
-            Log.d("MainActivity", "Store: " + details.getStoreName() + ", Rating: " + details.getStoreRating());
-        }
+        loadStoresFromFirestore();
 
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
         store_list.setAdapter(adapter);
@@ -92,5 +73,44 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         GoProfile.setOnClickListener(listener);
+    }
+
+    private void loadStoresFromFirestore() {
+        db.collection("stores").get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String id = document.getId();
+                            String name = document.getString("name");
+                            double rating = document.getDouble("rating");
+                            String photoUrl = document.getString("photo_url");
+                            String address = document.getString("address");
+                            String description = document.getString("description");
+                            String googleMapUrl = document.getString("google_map_url");
+
+                            // Download image from URL
+                            //Bitmap photo = getBitmapFromURL(photoUrl);
+
+                            shopDetailsList.add(new ShopDetails(id, photoUrl, name, String.valueOf(rating), address, description, googleMapUrl));
+                        }
+                        store_list.getAdapter().notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Error getting documents: " + task.getException(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

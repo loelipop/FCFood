@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "987655767070",
+    "project_id": "fengchiafood",
+    "storage_bucket": "fengchiafood.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987655767070:android:94e16e5612c48ac1205a0f",
+        "android_client_info": {
+          "package_name": "fcu.app.FengChiaFood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKnMx00y0pmPzTgPswgFCrN8OyI7aJcR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
