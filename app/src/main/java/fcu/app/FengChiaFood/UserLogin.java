@@ -23,6 +23,8 @@ public class UserLogin extends AppCompatActivity {
     public static final String USERNAME ="User Name";
     public static final String PASSWORD ="Password";
 
+    private Button btnGoToRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class UserLogin extends AppCompatActivity {
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password);
         login = findViewById(R.id.btn_login);
+
+        btnGoToRegister = findViewById(R.id.btn_gotoregis);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -57,6 +61,15 @@ public class UserLogin extends AppCompatActivity {
                 }
             }
         };
+        View.OnClickListener gotolistener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(UserLogin.this, UserRegister.class);
+                startActivity(intent);
+            }
+        };
         login.setOnClickListener(listener);
+        btnGoToRegister.setOnClickListener(gotolistener);
     }
 }
