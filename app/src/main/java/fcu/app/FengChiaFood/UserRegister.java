@@ -119,7 +119,7 @@ public class UserRegister extends AppCompatActivity {
                         */
 
                         db.collection("users")
-                                .document(username) //set custom document ID
+                                .document() //set custom document ID
                                 .set(user) //the object to be added
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
