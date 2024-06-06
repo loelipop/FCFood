@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ProfileActivity extends AppCompatActivity {
     private ImageButton GoMain;
+    private ImageButton GoColleciton;
     private Button Shopregister;
     private Button GoLogin;
     @Override
@@ -29,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         GoMain = findViewById(R.id.main_profile);
         Shopregister = findViewById(R.id.shopregister);
         GoLogin = findViewById(R.id.login);
+        GoColleciton = findViewById(R.id.collection_profile);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -45,11 +47,16 @@ public class ProfileActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(ProfileActivity.this, MainActivity.class);
                     startActivity(intent);
+                }else if(view.getId() == R.id.collection_profile){
+                    Intent intent = new Intent();
+                    intent.setClass(ProfileActivity.this, ShopCollection.class);
+                    startActivity(intent);
                 }
             }
         };
         GoMain.setOnClickListener(listener);
         Shopregister.setOnClickListener(listener);
         GoLogin.setOnClickListener(listener);
+        GoColleciton.setOnClickListener(listener);
     }
 }

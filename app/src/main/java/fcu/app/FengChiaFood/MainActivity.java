@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.google.firebase.FirebaseApp;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private StorageReference storageRef;
+    private ImageButton GoColleciton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
         store_list.setAdapter(adapter);
 
+        GoColleciton = findViewById(R.id.collection_profile);
+
+        View.OnClickListener listener_Collection = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, ShopCollection.class);
+                startActivity(intent);
+            }
+        };
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         GoProfile.setOnClickListener(listener);
+        GoColleciton.setOnClickListener(listener_Collection);
     }
 
     private void loadStoresFromFirestore() {
