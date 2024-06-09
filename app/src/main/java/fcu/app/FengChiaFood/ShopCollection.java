@@ -37,12 +37,12 @@ public class ShopCollection extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private ImageButton GoProfile;
-    private ImageButton GoCollection;
+    private ImageButton GoMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_shop_collection);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -50,7 +50,7 @@ public class ShopCollection extends AppCompatActivity {
         });
 
         GoProfile = findViewById(R.id.user_profile);
-        GoCollection = findViewById(R.id.main_profile);
+        GoMain = findViewById(R.id.main_profile);
         store_list = findViewById(R.id.StoreList);
         store_list.setLayoutManager(new LinearLayoutManager(this));
 
@@ -79,28 +79,16 @@ public class ShopCollection extends AppCompatActivity {
             }
         };
         GoProfile.setOnClickListener(listener);
-        GoCollection.setOnClickListener(listener);
+        GoMain.setOnClickListener(listener);
     }
 
     private void loadUserDetails() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            String userEmail = currentUser.getEmail();
-            db.collection("users")
-                    .whereEqualTo("email", userEmail)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            if (!task.getResult().isEmpty()) {
-                                String userId = task.getResult().getDocuments().get(0).getId();
-                                loadFavouriteStoreIds(userId);
-                            } else {
-                                Toast.makeText(ShopCollection.this, "No user found with the current email", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(ShopCollection.this, "Error getting user details: " + task.getException(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+            String userId = currentUser.getUid(); // 直接获取用户ID
+            loadFavouriteStoreIds(userId); // 使用获取到的用户ID加载用户的收藏店铺ID
+        } else {
+            Toast.makeText(ShopCollection.this, "User is not signed in", Toast.LENGTH_LONG).show();
         }
     }
 

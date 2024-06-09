@@ -69,25 +69,23 @@ public class MainActivity extends AppCompatActivity {
 
         GoColleciton = findViewById(R.id.collection_profile);
 
-        View.OnClickListener listener_Collection = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, ShopCollection.class);
-                startActivity(intent);
-            }
-        };
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,ProfileActivity.class);
-                startActivity(intent);
+                if(v.getId() == R.id.collection_profile){
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, ShopCollection.class);
+                    startActivity(intent);
+                }else if(v.getId() == R.id.user_profile){
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                }
             }
         };
         GoProfile.setOnClickListener(listener);
-        GoColleciton.setOnClickListener(listener_Collection);
+        GoColleciton.setOnClickListener(listener);
     }
 
     private void loadStoresFromFirestore() {
