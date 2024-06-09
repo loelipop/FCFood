@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -38,6 +39,7 @@ public class ShopCollection extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ImageButton GoProfile;
     private ImageButton GoMain;
+    private TextView noFavorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class ShopCollection extends AppCompatActivity {
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
         store_list.setAdapter(adapter);
 
+        noFavorites = findViewById(R.id.noFavoritesTextView);
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +92,7 @@ public class ShopCollection extends AppCompatActivity {
             String userId = currentUser.getUid(); // 直接获取用户ID
             loadFavouriteStoreIds(userId); // 使用获取到的用户ID加载用户的收藏店铺ID
         } else {
-            Toast.makeText(ShopCollection.this, "User is not signed in", Toast.LENGTH_LONG).show();
+            noFavorites.setText("用戶沒有登入");
         }
     }
 
@@ -102,12 +106,17 @@ public class ShopCollection extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             favouriteStoreIds.add(document.getString("store_id"));
                         }
-                        fetchStoresByIds(favouriteStoreIds);
+                        if (favouriteStoreIds.isEmpty()) {
+                            noFavorites.setText("沒有收藏店鋪");
+                        } else {
+                            fetchStoresByIds(favouriteStoreIds);
+                        }
                     } else {
                         Toast.makeText(ShopCollection.this, "Error getting favourite store IDs: " + task.getException(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
+
 
     private void fetchStoresByIds(List<String> storeIds) {
         if (storeIds.isEmpty()) {
