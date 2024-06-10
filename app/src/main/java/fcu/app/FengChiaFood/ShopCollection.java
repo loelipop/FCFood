@@ -1,15 +1,14 @@
 package fcu.app.FengChiaFood;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,18 +16,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,24 +32,24 @@ public class ShopCollection extends AppCompatActivity {
     private List<ShopDetails> shopDetailsList;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
-    private ImageButton GoProfile;
-    private ImageButton GoMain;
     private TextView noFavorites;
-
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_collection);
+
+        store_list = findViewById(R.id.StoreList);
+        noFavorites = findViewById(R.id.nocollection);
+        store_list.setLayoutManager(new LinearLayoutManager(this));
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            store_list.setPadding(systemBars.left, store_list.getPaddingTop(), systemBars.right, store_list.getPaddingBottom());
+            bottomNavigationView.setPadding(0, 0, 0, 0);
             return insets;
         });
-
-        GoProfile = findViewById(R.id.user_profile);
-        GoMain = findViewById(R.id.main_profile);
-        store_list = findViewById(R.id.StoreList);
-        store_list.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseApp.initializeApp(this);
         db = FirebaseFirestore.getInstance();
@@ -66,24 +61,27 @@ public class ShopCollection extends AppCompatActivity {
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
         store_list.setAdapter(adapter);
 
-        noFavorites = findViewById(R.id.noFavoritesTextView);
-
-        View.OnClickListener listener = new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                if(view.getId() == R.id.main_profile){
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.home_button){
                     Intent intent = new Intent();
                     intent.setClass(ShopCollection.this, MainActivity.class);
                     startActivity(intent);
-                }else if(view.getId() == R.id.user_profile){
+                    finish();
+                    return true;
+                }else if(menuItem.getItemId() == R.id.profile_button){
                     Intent intent = new Intent();
                     intent.setClass(ShopCollection.this, ProfileActivity.class);
                     startActivity(intent);
+                    finish();
+                    return true;
                 }
+                return false;
             }
-        };
-        GoProfile.setOnClickListener(listener);
-        GoMain.setOnClickListener(listener);
+        });
+
+
     }
 
     private void loadUserDetails() {
@@ -91,6 +89,7 @@ public class ShopCollection extends AppCompatActivity {
         if (currentUser != null) {
             String userId = currentUser.getUid(); // 直接获取用户ID
             loadFavouriteStoreIds(userId); // 使用获取到的用户ID加载用户的收藏店铺ID
+            noFavorites.setText("");
         } else {
             noFavorites.setText("用戶沒有登入");
         }

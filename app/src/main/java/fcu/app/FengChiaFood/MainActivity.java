@@ -6,11 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,7 +25,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,25 +41,22 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView store_list;
     private List<ShopDetails> shopDetailsList;
-    private ImageButton GoProfile;
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private StorageReference storageRef;
-    private ImageButton GoColleciton;
+    private TextView textView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        GoProfile = findViewById(R.id.user_profile);
+        //GoProfile = findViewById(R.id.user_profile);
+        textView = findViewById(R.id.text_food_map);
         store_list = findViewById(R.id.StoreList);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         store_list.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseApp.initializeApp(this);
@@ -63,29 +66,36 @@ public class MainActivity extends AppCompatActivity {
 
         shopDetailsList = new ArrayList<>();
         loadStoresFromFirestore();
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            store_list.setPadding(systemBars.left, store_list.getPaddingTop(), systemBars.right, store_list.getPaddingBottom());
+            bottomNavigationView.setPadding(0, 0, 0, 0);
+            return insets;
+        });
 
         StoreListAdapter adapter = new StoreListAdapter(this, shopDetailsList);
         store_list.setAdapter(adapter);
 
-        GoColleciton = findViewById(R.id.collection_profile);
 
-
-        View.OnClickListener listener = new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if(v.getId() == R.id.collection_profile){
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.favourites_button){
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, ShopCollection.class);
                     startActivity(intent);
-                }else if(v.getId() == R.id.user_profile){
+                    return true;
+                }else if(menuItem.getItemId() == R.id.profile_button){
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, ProfileActivity.class);
                     startActivity(intent);
+                    return true;
                 }
+                return false;
             }
-        };
-        GoProfile.setOnClickListener(listener);
-        GoColleciton.setOnClickListener(listener);
+        });
+
+
     }
 
     private void loadStoresFromFirestore() {
@@ -100,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
                             String address = document.getString("address");
                             String description = document.getString("description");
                             String googleMapUrl = document.getString("google_map_url");
-
-                            // Download image from URL
-                            //Bitmap photo = getBitmapFromURL(photoUrl);
 
                             shopDetailsList.add(new ShopDetails(id, photoUrl, name, String.valueOf(rating), address, description, googleMapUrl));
                         }

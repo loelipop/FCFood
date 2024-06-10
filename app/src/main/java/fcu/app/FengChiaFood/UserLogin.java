@@ -63,8 +63,7 @@ public class UserLogin extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 註冊成功，更新 UI
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(UserLogin.this, "登入成功",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserLogin.this, "登入成功", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent();
                             intent.setClass(UserLogin.this,MainActivity.class);
                             UserLogin.this.startActivity(intent);
