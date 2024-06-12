@@ -40,12 +40,8 @@ public class UserRegister extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private DocumentReference docRef;
 
     private Map<String, Object> user = new HashMap<>();
-
-    private int usersDocumentID = 1;
-    private boolean findIDflag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,28 +63,6 @@ public class UserRegister extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
-        /*while(findIDflag){
-            docRef = db.collection("users").document(String.valueOf(usersDocumentID));
-
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            usersDocumentID += 1;
-                        }
-                        else{
-                            findIDflag = false;
-                        }
-                    }
-                    else {
-                        Log.d("fetchDocID", "get failed with ", task.getException());
-                    }
-                }
-            });
-        }*/
 
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override

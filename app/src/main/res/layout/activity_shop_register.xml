@@ -120,23 +120,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="參考圖片:"
+        android:text="參考圖片(選填):"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_shopinfo" />
-
-    <EditText
-        android:id="@+id/editTextText8"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Button
         android:id="@+id/btn_shopregister"
@@ -148,5 +135,38 @@
         android:text="註冊店家"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText8" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_selpic" />
+
+    <Button
+        android:id="@+id/btn_selpic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="24dp"
+        android:text="選擇圖片"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_uploadpic" />
+
+    <ImageView
+        android:id="@+id/iv_uploadpic"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        tools:srcCompat="@drawable/testpic" />
+
+    <!--
+    <TextView
+        android:id="@+id/tv_picname"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btn_selpic"
+        app:layout_constraintStart_toEndOf="@+id/iv_uploadpic"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>
