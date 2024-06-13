@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                         intent.setClass(ProfileActivity.this, ShopRegister.class);
                         startActivity(intent);
                         finish();
-                    }{
+                    }else{
                         Toast.makeText(ProfileActivity.this, "請先登入以使用本功能" , Toast.LENGTH_LONG).show();
                     }
                 }else if(view.getId() == R.id.login){
