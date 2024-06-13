@@ -40,6 +40,7 @@ public class UserRegister extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private String user_id;
 
     private Map<String, Object> user = new HashMap<>();
 
@@ -64,6 +65,12 @@ public class UserRegister extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        /*
+        if(mAuth.getCurrentUser() != null){
+            Toast.makeText(this, mAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+        }
+        */
+
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,10 +87,10 @@ public class UserRegister extends AppCompatActivity {
                         Toast.makeText(UserRegister.this, "兩次密碼輸入不一致", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        register(email, password);
+                        register(email, password, username);
 
                         user.put("email", email);
-                        user.put("user_id", mAuth.getCurrentUser().getUid());
+                        user.put("user_id", user_id); //cannot get UID when registered
                         user.put("user_name", username);
 
                         /*
@@ -91,7 +98,7 @@ public class UserRegister extends AppCompatActivity {
                             return;
                         }
                         */
-
+                        /*
                         db.collection("users")
                                 .document() //set custom document ID
                                 .set(user) //the object to be added
@@ -107,6 +114,13 @@ public class UserRegister extends AppCompatActivity {
                                         Log.w("AddDB", "Error adding document", e);
                                     }
                                 });
+
+
+                        Intent intent = new Intent();
+                        intent.setClass(UserRegister.this, UserLogin.class);
+                        startActivity(intent);
+
+                         */
                     }
                 }
                 else if(v.getId() == R.id.btn_gotouserlogin){
@@ -121,16 +135,55 @@ public class UserRegister extends AppCompatActivity {
         btnGoToUserLogin.setOnClickListener(btnListener);
     }
 
-    private void register(String email, String password) {
+    private void register(String email, String password, String username) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseUser cUser = mAuth.getCurrentUser();
                     Toast.makeText(UserRegister.this, "註冊成功", Toast.LENGTH_SHORT).show();
+                    /*
+                    if(cUser == null){
+                        Log.d("currentUser", "current user is null");
+                    }
+                    else{
+                        Log.d("currentUser", cUser.getUid());
+                    }
+                    */
+
+                    user.put("email", email);
+                    user.put("user_id", cUser.getUid());
+                    user.put("user_name", username);
+
+                    db.collection("users")
+                            .document() //set custom document ID
+                            .set(user) //the object to be added
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Log.d("AddDB", "Add database success");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("AddDB", "Error adding document", e);
+                                }
+                            });
+
+
+                    Intent intent = new Intent();
+                    intent.setClass(UserRegister.this, ProfileActivity.class);
+                    startActivity(intent);
                 }
                 else {
-                    Toast.makeText(UserRegister.this, "註冊失敗", Toast.LENGTH_SHORT).show();
+                    try{
+                        throw task.getException();
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(UserRegister.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    //Toast.makeText(UserRegister.this, "註冊失敗", Toast.LENGTH_SHORT).show();
                 }
             }
         });

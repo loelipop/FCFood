@@ -70,6 +70,13 @@ public class ShopRegister extends AppCompatActivity {
         ref = FirebaseStorage.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
 
+        /*if(ivUploadPic.getTag().toString().equals("false")){
+            Toast.makeText(this, "false detect", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "true detect", Toast.LENGTH_SHORT).show();
+        }*/
+
         View.OnClickListener btnListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +91,9 @@ public class ShopRegister extends AppCompatActivity {
 
                     if (shopname.isEmpty() || shopLocation.isEmpty() || googleMapsLink.isEmpty() || shopInfo.isEmpty()) {
                         Toast.makeText(ShopRegister.this, "有資料缺漏，請再檢查一次", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (ivUploadPic.getTag().toString().equals("false")){
+                        Toast.makeText(ShopRegister.this, "照片未上傳", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         shop.put("address", shopLocation);
@@ -106,6 +116,7 @@ public class ShopRegister extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Log.w("AddDB", "Error adding document", e);
+                                        Toast.makeText(ShopRegister.this, "資料庫更新失敗", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -120,12 +131,14 @@ public class ShopRegister extends AppCompatActivity {
                         uploadTask.addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
+                                Log.w("AddPic", "Error adding picture", exception);
                                 Toast.makeText(ShopRegister.this, "圖片上傳失敗", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(ShopRegister.this, "圖片上傳成功", Toast.LENGTH_SHORT).show();
+                                Log.d("AddPic", "Add storage success");
+                                Toast.makeText(ShopRegister.this, "註冊店家成功", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -158,6 +171,7 @@ public class ShopRegister extends AppCompatActivity {
             if (null != selectedImageUri) {
                 // update the preview image in the layout
                 ivUploadPic.setImageURI(selectedImageUri);
+                ivUploadPic.setTag("true");
                 //tvPicName.setText(selectedImageUri.toString());
             }
         }
