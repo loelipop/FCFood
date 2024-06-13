@@ -82,15 +82,8 @@ public class ShopRegister extends AppCompatActivity {
 
                     StorageReference shopPicRef = ref.child(shopname + ".jpg");
 
-                    if (googleMapsLink.isEmpty()) {
-                        googleMapsLink = "尚無Google Maps 連結";
-                    }
-                    if (shopInfo.isEmpty()) {
-                        shopInfo = "店家很懶，什麼都沒介紹";
-                    }
-
-                    if (shopname.isEmpty() || shopLocation.isEmpty()) {
-                        Toast.makeText(ShopRegister.this, "店名或地址缺失", Toast.LENGTH_SHORT).show();
+                    if (shopname.isEmpty() || shopLocation.isEmpty() || googleMapsLink.isEmpty() || shopInfo.isEmpty()) {
+                        Toast.makeText(ShopRegister.this, "有資料缺漏，請再檢查一次", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         shop.put("address", shopLocation);
