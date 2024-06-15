@@ -144,7 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="登入"
-        android:textColor="#000000"
+        android:textColor="#0D6EFD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 </androidx.constraintlayout.widget.ConstraintLayout>
