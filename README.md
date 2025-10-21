@@ -1,14 +1,23 @@
 # 逢甲美食地圖
 這個安卓應用程式可以讓游客搜尋逢甲一帶的美食，而店家也可以上架關於店鋪的介紹來吸引游客到訪。
 
+## 使用技術
+支援系統：Android  
+使用語言：Java  
+資料庫：Firebase Firestore  
+身份驗證：Firebase Authentication  
+
 ## 功能介紹
 ### 店家介紹
 點擊你想要瞭解的店家  
 ![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture1.jpg)  
-進入介紹頁面之後可查看包含介紹、評價及地址等資訊  
+
+進入介紹頁面之後可查看包含介紹、評價及地址等資訊,點擊地址即可跳轉至google map進行導航  
 ![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture2.jpg)  
+
 用戶可在登入后收藏及評價店家  
 ![image_alt](https://github.com/loelipop/FCFood/blob/0b01fec520b903f14b0f3ba0b84f70cf9fd2f08a/Picture4.jpg)  
+
 ### 店家上架
 店家必須進行登入以驗證身份  
 輸入店鋪的資訊即可上架  
