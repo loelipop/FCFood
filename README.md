@@ -4,9 +4,12 @@
 ## 功能介紹
 ### 店家介紹
 點擊你想要瞭解的店家  
-![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture1.jpg)
-進入介紹頁面之後可查看包含介紹、評價及地址等資訊
-用戶可在登入后收藏及評價店家
+![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture1.jpg)  
+進入介紹頁面之後可查看包含介紹、評價及地址等資訊  
+![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture2.jpg)  
+用戶可在登入后收藏及評價店家  
+![image_alt](https://github.com/loelipop/FCFood/blob/0b01fec520b903f14b0f3ba0b84f70cf9fd2f08a/Picture4.jpg)  
 ### 店家上架
-店家必須進行登入以驗證身份
-輸入店鋪的資訊即可上架
+店家必須進行登入以驗證身份  
+輸入店鋪的資訊即可上架  
+![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture3.png)  
