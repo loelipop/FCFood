@@ -3,7 +3,7 @@
 
 ## 功能介紹
 ### 店家介紹
-點擊你想要瞭解的店家
+點擊你想要瞭解的店家  
 ![image_alt](https://github.com/loelipop/FCFood/blob/3c38366e2d8b86a00810d2feba22c81b5530e807/Picture1.jpg)
 進入介紹頁面之後可查看包含介紹、評價及地址等資訊
 用戶可在登入后收藏及評價店家
